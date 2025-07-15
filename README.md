@@ -2,9 +2,7 @@
 
 A personal **steganography application** that allows users to **securely embed and extract encrypted data invisibly in PNG images** using **Least Significant Bit (LSB)** insertion. Inspired by the MVPBlocks aesthetic, this project features beautiful **glass morphism effects**, smooth **Framer Motion animations**, and a sleek **dark gradient theme**.
 
-> ⚠️ This is a **proof-of-concept** project focused on core steganography features. Not intended as a production SaaS product.
 
----
 
 ## ✨ Features
 
