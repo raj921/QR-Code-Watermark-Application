@@ -1,103 +1,129 @@
-QR-Code Watermark Application
-Overview
-This is a personal steganography application with MVPBlocks-inspired design that allows users to embed and extract encrypted data invisibly in PNG images using LSB (Least Significant Bit) insertion techniques. The application features beautiful glass morphism effects, smooth animations, and a dark gradient theme. Built as a proof-of-concept for invisible data transmission.
+ QR-Code Watermark Application
+A personal steganography application built with ❤️ using modern web technologies. This proof-of-concept tool lets users encrypt and hide data invisibly in PNG images using Least Significant Bit (LSB) steganography combined with AES-GCM encryption, all wrapped in a beautiful MVPBlocks-inspired UI.
 
-User Preferences
-Preferred communication style: Simple, everyday language. Design preference: MVPBlocks aesthetic with beautiful animations and glass morphism effects. Project scope: Personal project focused on core steganography features only - no SaaS elements.
+✨ Features
+🔒 Secure Encryption — AES-GCM with PBKDF2 key derivation
 
-System Architecture
-Frontend Architecture
-Framework: React 18 with TypeScript
-Build Tool: Vite for fast development and optimized builds
-UI Library: Radix UI components with shadcn/ui design system
-Styling: Tailwind CSS with custom CSS variables for theming
-State Management: TanStack Query for server state management
-Routing: Wouter for lightweight client-side routing
-Animations: Framer Motion for smooth UI animations
-Backend Architecture
-Runtime: Node.js with Express.js server
-Language: TypeScript with ES modules
-Database: PostgreSQL with Drizzle ORM
-Database Provider: Neon serverless PostgreSQL
-Session Management: connect-pg-simple for PostgreSQL-backed sessions
-Development: Hot reload with Vite middleware integration
-Build and Development
-Monorepo Structure: Shared code between client and server
-Development Server: Vite dev server with Express API integration
-Production Build: Separate client (Vite) and server (esbuild) builds
-TypeScript: Strict mode enabled with path mapping for clean imports
-Key Components
-Steganography Engine
-LSB Insertion: Embeds data in PNG alpha channels using least significant bit manipulation
-Encryption: AES-GCM encryption with Web Crypto API for payload security
-Password Derivation: PBKDF2 for secure key generation from user passwords
-Capacity Checking: Validates image size against payload requirements
-QR Code Integration
-Scanner: WebAssembly-based QR code detection (simulated for now)
-Generator: Creates QR codes for easy data sharing
-Camera Access: Progressive Web App features for mobile scanning
-UI Components
-File Upload: Drag-and-drop zones with PNG validation
-Progress Tracking: Real-time progress bars for processing operations
-Result Display: Downloadable results with status indicators
-Activity Stats: Real-time database statistics showing usage metrics
-Responsive Design: Mobile-first approach with glass morphism effects
-Database Schema
-Users Table: Basic user management structure with username and email
-Embeddings Table: Tracks all embedding operations with file details and payload size
-Extractions Table: Records all extraction attempts with success/failure status
-PostgreSQL: Production-ready database with Drizzle ORM
-Migration Support: Built-in migration system for schema changes
-Data Flow
-Embed Process
-User uploads PNG image and enters payload text
-Frontend validates file type and size constraints
-Payload is encrypted using Web Crypto API
-Encrypted data is embedded in image using LSB steganography
-Modified image is returned as downloadable blob
-Extract Process
-User uploads watermarked PNG image
-LSB extraction algorithm reads hidden data from alpha channel
-Encrypted payload is decrypted using stored/provided key
-Original message is displayed to user
-QR Code Workflow
-Generated QR codes contain references to watermarked images
-Scanner detects QR codes and extracts image references
-Images are processed through standard extraction pipeline
-External Dependencies
-Core Libraries
-@neondatabase/serverless: Serverless PostgreSQL connection
-drizzle-orm: Type-safe database operations
-@tanstack/react-query: Server state management
-@radix-ui/react-*: Accessible UI component primitives
-framer-motion: Animation library for smooth interactions
-Development Tools
-@replit/vite-plugin-runtime-error-modal: Error handling for Replit environment
-@replit/vite-plugin-cartographer: Development tooling integration
-tsx: TypeScript execution for development server
-Security and Crypto
-Web Crypto API: Native browser cryptography
-connect-pg-simple: Secure session management
-zod: Runtime type validation and schema parsing
-Deployment Strategy
-Development
-Local Development: Vite dev server with Express API proxy
-Hot Reload: Full-stack hot reload with Vite middleware
-Error Handling: Runtime error overlay for debugging
-Environment: NODE_ENV-based configuration switching
-Production
-Build Process: Separate client and server builds
-Client Build: Vite builds optimized React bundle to dist/public
-Server Build: esbuild creates Node.js bundle in dist/
-Static Assets: Client serves from built assets directory
-Database: PostgreSQL with connection pooling via Neon
-Database Management
-Migrations: Drizzle Kit for schema migrations
-Push Command: db:push for development schema updates
-Connection: Environment-based DATABASE_URL configuration
-Backup Strategy: Relies on Neon's built-in backup capabilities
-Session and Security
-Session Storage: PostgreSQL-backed sessions for scalability
-CORS: Configured for cross-origin requests in development
-Environment Variables: Secure configuration management
-Error Handling: Centralized error middleware with proper status codes
+🖼️ Invisible Embedding — Data is hidden inside PNG alpha channels
+
+📷 QR Code Workflow — Generate and scan QR codes for sharing stego-images
+
+💾 PostgreSQL Database — Tracks embedding and extraction usage
+
+🎨 Gorgeous UI — Glass morphism, smooth animations, and responsive design
+
+🛠️ Optimized Dev Stack — Vite, React 18, TypeScript, Express, Drizzle ORM
+
+🧠 How It Works
+🔐 Embed Process
+User uploads a PNG image and inputs a secret message.
+
+Message is encrypted using AES-GCM via Web Crypto API.
+
+Encrypted message is embedded into the image using LSB manipulation.
+
+The stego-image is generated and made available for download.
+
+🔓 Extract Process
+User uploads the watermarked PNG image.
+
+LSB algorithm extracts the hidden encrypted message.
+
+AES-GCM decryption reveals the original secret message.
+
+Payload is displayed in the UI.
+
+📱 QR Code Workflow
+QR Generator: Creates a QR code pointing to the watermarked image.
+
+QR Scanner: (Simulated) detects QR codes and initiates extraction workflow.
+
+Camera Access: PWA-enabled for future mobile camera integration.
+
+🧱 Tech Stack
+🖥️ Frontend
+Framework: React 18 + TypeScript
+
+Build Tool: Vite
+
+UI: Radix UI + shadcn/ui
+
+Styling: Tailwind CSS + CSS variables
+
+Animations: Framer Motion
+
+Routing: Wouter
+
+State Management: TanStack Query
+
+🌐 Backend
+Runtime: Node.js (ESM)
+
+Framework: Express.js
+
+Database: PostgreSQL via Neon (serverless)
+
+ORM: Drizzle ORM
+
+Session Management: connect-pg-simple
+
+📂 Project Structure
+bash
+Copy
+Edit
+/
+├── client/                 # React frontend
+│   └── ...
+├── server/                 # Express backend
+│   └── ...
+├── shared/                # Shared types/utilities between frontend and backend
+├── drizzle/               # Drizzle ORM config and migrations
+├── .env                   # Environment variables
+├── vite.config.ts         # Vite setup with middleware
+├── tsconfig.json
+└── README.md
+🧪 Database Schema
+🧑 Users
+Field	Type
+id	UUID
+username	Text
+email	Text
+
+📥 Embeddings
+Field	Type
+id	UUID
+user_id	UUID FK
+filename	Text
+payload_size	Integer
+created_at	Timestamp
+
+📤 Extractions
+Field	Type
+id	UUID
+user_id	UUID FK
+filename	Text
+success	Boolean
+created_at	Timestamp
+
+⚙️ Development
+🔧 Local Setup
+bash
+Copy
+Edit
+# 1. Clone the repo
+git clone https://github.com/yourusername/qr-watermark-app.git
+cd qr-watermark-app
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Setup environment variables
+cp .env.example .env
+# Fill in DATABASE_URL and any necessary secrets
+
+# 4. Run database migrations
+pnpm drizzle db:push
+
+# 5. Start dev server (client + API)
+pnpm dev
+
