@@ -1,129 +1,67 @@
- QR-Code Watermark Application
-A personal steganography application built with ❤️ using modern web technologies. This proof-of-concept tool lets users encrypt and hide data invisibly in PNG images using Least Significant Bit (LSB) steganography combined with AES-GCM encryption, all wrapped in a beautiful MVPBlocks-inspired UI.
+# 🕵️‍♂️ QR-Code Watermark Application
 
-✨ Features
-🔒 Secure Encryption — AES-GCM with PBKDF2 key derivation
+A personal **steganography application** that allows users to **securely embed and extract encrypted data invisibly in PNG images** using **Least Significant Bit (LSB)** insertion. Inspired by the MVPBlocks aesthetic, this project features beautiful **glass morphism effects**, smooth **Framer Motion animations**, and a sleek **dark gradient theme**.
 
-🖼️ Invisible Embedding — Data is hidden inside PNG alpha channels
+> ⚠️ This is a **proof-of-concept** project focused on core steganography features. Not intended as a production SaaS product.
 
-📷 QR Code Workflow — Generate and scan QR codes for sharing stego-images
+---
 
-💾 PostgreSQL Database — Tracks embedding and extraction usage
+## ✨ Features
 
-🎨 Gorgeous UI — Glass morphism, smooth animations, and responsive design
+- 🔐 **AES-GCM Encryption** with PBKDF2-based password key derivation
+- 🖼️ **LSB Steganography** in PNG alpha channels for invisible data embedding
+- 📸 **QR Code Support** for referencing and retrieving stego-images
+- 📈 **Activity Stats** showing usage and operations (via PostgreSQL)
+- 🎨 **MVPBlocks-Inspired UI** with animations and glassmorphism
+- 🧩 **Type-Safe Full Stack** built using modern tools like Vite, React, Express, Drizzle ORM, and Tailwind CSS
 
-🛠️ Optimized Dev Stack — Vite, React 18, TypeScript, Express, Drizzle ORM
+---
 
-🧠 How It Works
-🔐 Embed Process
-User uploads a PNG image and inputs a secret message.
+## 🧠 How It Works
 
-Message is encrypted using AES-GCM via Web Crypto API.
+### 🔐 Embedding Flow
 
-Encrypted message is embedded into the image using LSB manipulation.
+1. Upload a PNG image and enter a secret message.
+2. Message is encrypted using the **Web Crypto API** (AES-GCM).
+3. The encrypted message is embedded into the **alpha channel** using LSB.
+4. The modified image is returned as a downloadable file.
 
-The stego-image is generated and made available for download.
+### 🔓 Extraction Flow
 
-🔓 Extract Process
-User uploads the watermarked PNG image.
+1. Upload a watermarked PNG.
+2. The embedded data is extracted from LSB bits in the alpha channel.
+3. The encrypted message is decrypted using the provided key.
+4. The original message is displayed to the user.
 
-LSB algorithm extracts the hidden encrypted message.
+### 📱 QR Code Flow
 
-AES-GCM decryption reveals the original secret message.
+- **Generate** QR codes pointing to watermarked images.
+- **Scan** QR codes to quickly retrieve hidden data (simulated for now).
+- Future support for camera access in PWA.
 
-Payload is displayed in the UI.
+---
 
-📱 QR Code Workflow
-QR Generator: Creates a QR code pointing to the watermarked image.
+## 🧱 Tech Stack
 
-QR Scanner: (Simulated) detects QR codes and initiates extraction workflow.
+### Frontend
 
-Camera Access: PWA-enabled for future mobile camera integration.
+- **React 18 + TypeScript**
+- **Vite** (for blazing-fast development/build)
+- **Radix UI** + `shadcn/ui` (for accessible UI components)
+- **Tailwind CSS** (with custom theming via CSS variables)
+- **Framer Motion** (smooth animations)
+- **Wouter** (minimalistic routing)
+- **TanStack Query** (server state management)
 
-🧱 Tech Stack
-🖥️ Frontend
-Framework: React 18 + TypeScript
+### Backend
 
-Build Tool: Vite
+- **Node.js + Express (ESM)**
+- **Drizzle ORM** (type-safe DB interactions)
+- **PostgreSQL** (hosted via [Neon](https://neon.tech))
+- **connect-pg-simple** (for session storage)
+- **Zod** (runtime type validation)
 
-UI: Radix UI + shadcn/ui
+---
 
-Styling: Tailwind CSS + CSS variables
-
-Animations: Framer Motion
-
-Routing: Wouter
-
-State Management: TanStack Query
-
-🌐 Backend
-Runtime: Node.js (ESM)
-
-Framework: Express.js
-
-Database: PostgreSQL via Neon (serverless)
-
-ORM: Drizzle ORM
-
-Session Management: connect-pg-simple
-
-📂 Project Structure
-bash
-Copy
-Edit
-/
-├── client/                 # React frontend
-│   └── ...
-├── server/                 # Express backend
-│   └── ...
-├── shared/                # Shared types/utilities between frontend and backend
-├── drizzle/               # Drizzle ORM config and migrations
-├── .env                   # Environment variables
-├── vite.config.ts         # Vite setup with middleware
-├── tsconfig.json
-└── README.md
-🧪 Database Schema
-🧑 Users
-Field	Type
-id	UUID
-username	Text
-email	Text
-
-📥 Embeddings
-Field	Type
-id	UUID
-user_id	UUID FK
-filename	Text
-payload_size	Integer
-created_at	Timestamp
-
-📤 Extractions
-Field	Type
-id	UUID
-user_id	UUID FK
-filename	Text
-success	Boolean
-created_at	Timestamp
-
-⚙️ Development
-🔧 Local Setup
-bash
-Copy
-Edit
-# 1. Clone the repo
-git clone https://github.com/yourusername/qr-watermark-app.git
-cd qr-watermark-app
-
-# 2. Install dependencies
-pnpm install
-
-# 3. Setup environment variables
-cp .env.example .env
-# Fill in DATABASE_URL and any necessary secrets
-
-# 4. Run database migrations
-pnpm drizzle db:push
-
-# 5. Start dev server (client + API)
-pnpm dev
+## 📁 Project Structure
 
