@@ -83,3 +83,11 @@ pnpm drizzle db:push
 # 5. Start the dev server
 pnpm dev
 
+# Build frontend and backend
+pnpm build:client
+pnpm build:server
+
+# Start the production server
+pnpm start
+
+
