@@ -98,7 +98,8 @@ export async function extractDataFromImage(imageFile: File): Promise<string | nu
 
         const dataLength = parseInt(headerBinary, 2);
         
-        if (dataLength <= 0 || dataLength > pixels.length) {
+        if (dataLength <= 0 || dataLength > pixels.length * 4) {
+          console.log('No valid steganographic data found in image');
           resolve(null); // No valid data found
           return;
         }

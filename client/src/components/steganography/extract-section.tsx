@@ -43,7 +43,7 @@ export default function ExtractSection({ file, setFile }: ExtractSectionProps) {
       const encryptedData = await extractDataFromImage(file);
       
       if (!encryptedData) {
-        throw new Error("No hidden data found in the image.");
+        throw new Error("No hidden data found in this image. Make sure you're using an image that was processed with the embed function.");
       }
 
       // Decrypt the extracted data

@@ -108,14 +108,39 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <button className="bg-gradient-to-r from-primary to-secondary px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all font-semibold">
+              <button 
+                onClick={() => document.getElementById('embed')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-gradient-to-r from-primary to-secondary px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all font-semibold"
+              >
                 <QrCode className="w-5 h-5 mr-2 inline" />
                 Start Embedding
               </button>
-              <button className="glass-card px-8 py-4 rounded-xl hover:bg-[var(--glass-light)] transition-all">
+              <button 
+                onClick={() => document.getElementById('extract')?.scrollIntoView({ behavior: 'smooth' })}
+                className="glass-card px-8 py-4 rounded-xl hover:bg-[var(--glass-light)] transition-all"
+              >
                 <Lock className="w-5 h-5 mr-2 inline" />
                 Try Scanner
               </button>
+            </motion.div>
+            
+            <motion.div 
+              className="mt-12 glass-card p-6 rounded-xl max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <div className="text-center">
+                <h3 className="text-lg font-semibold mb-3 text-primary">How It Works</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+                  <div className="text-left">
+                    <strong className="text-foreground">1. Embed:</strong> Upload any PNG image and enter your secret message. The app encrypts your data and hides it invisibly in the image's alpha channel.
+                  </div>
+                  <div className="text-left">
+                    <strong className="text-foreground">2. Extract:</strong> Upload a watermarked PNG to reveal the hidden message. Only images processed by this app contain extractable data.
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>

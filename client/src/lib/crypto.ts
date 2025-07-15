@@ -41,12 +41,15 @@ async function deriveKeyFromPassword(password: string): Promise<CryptoKey> {
   );
 }
 
+// Fixed encryption key for demo purposes
+const DEMO_PASSWORD = 'qr-watermark-demo-2025';
+
 export async function encryptData(data: string, password?: string): Promise<string> {
   const encoder = new TextEncoder();
   const encodedData = encoder.encode(data);
   
-  // Use provided password or generate random key
-  const key = password ? await deriveKeyFromPassword(password) : await generateKey();
+  // Use fixed demo password for consistent encryption/decryption
+  const key = await deriveKeyFromPassword(password || DEMO_PASSWORD);
   
   // Generate random IV
   const iv = crypto.getRandomValues(new Uint8Array(IV_LENGTH));
@@ -81,8 +84,8 @@ export async function decryptData(encryptedData: string, password?: string): Pro
     const iv = combined.slice(0, IV_LENGTH);
     const encrypted = combined.slice(IV_LENGTH);
     
-    // Use provided password or generate key (in production, key should be stored/provided)
-    const key = password ? await deriveKeyFromPassword(password) : await generateKey();
+    // Use the same fixed demo password for consistent decryption
+    const key = await deriveKeyFromPassword(password || DEMO_PASSWORD);
     
     // Decrypt data
     const decrypted = await crypto.subtle.decrypt(

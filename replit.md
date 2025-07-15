@@ -1,12 +1,14 @@
-# QR Code Steganography Application
+# QR-Code Watermark Application
 
 ## Overview
 
-This is a full-stack steganography application that allows users to embed and extract hidden data from PNG images using LSB (Least Significant Bit) insertion techniques. The application combines image steganography with QR code generation and scanning capabilities, creating a complete solution for covert data transmission.
+This is a personal steganography application with MVPBlocks-inspired design that allows users to embed and extract encrypted data invisibly in PNG images using LSB (Least Significant Bit) insertion techniques. The application features beautiful glass morphism effects, smooth animations, and a dark gradient theme. Built as a proof-of-concept for invisible data transmission.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design preference: MVPBlocks aesthetic with beautiful animations and glass morphism effects.
+Project scope: Personal project focused on core steganography features only - no SaaS elements.
 
 ## System Architecture
 
