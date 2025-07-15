@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navigation from "@/components/ui/navigation";
 import EmbedSection from "@/components/steganography/embed-section";
 import ExtractSection from "@/components/steganography/extract-section";
+import ActivityStats from "@/components/stats/activity-stats";
 import { QrCode, Lock, Shield, Smartphone, Server } from "lucide-react";
 
 export default function Home() {
@@ -181,7 +182,7 @@ export default function Home() {
       {/* Main Application */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -200,6 +201,17 @@ export default function Home() {
               <ExtractSection file={extractFile} setFile={setExtractFile} />
             </motion.div>
           </div>
+          
+          {/* Activity Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="max-w-md mx-auto"
+          >
+            <ActivityStats />
+          </motion.div>
         </div>
       </section>
 

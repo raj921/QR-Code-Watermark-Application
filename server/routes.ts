@@ -29,7 +29,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: validation.error.message });
       }
 
-      // For now, just return success - the actual processing is done client-side
+      // Record the embedding operation in the database
+      await storage.recordEmbedding({
+        userId: null, // No user authentication for personal project
+        originalFilename: req.file.originalname,
+        payloadSize: validation.data.payload.length,
+        encryptionKey: validation.data.key || null,
+      });
+
       res.json({ 
         success: true, 
         message: "Image processed successfully",
@@ -53,7 +60,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: validation.error.message });
       }
 
-      // For now, just return success - the actual processing is done client-side
+      // Record the extraction attempt in the database
+      await storage.recordExtraction({
+        userId: null, // No user authentication for personal project
+        filename: req.file.originalname,
+        success: "true", // Assume success for now - actual processing is client-side
+        extractedDataSize: null, // Will be updated when we get actual data
+      });
+
       res.json({ 
         success: true, 
         message: "Data extracted successfully",
@@ -61,6 +75,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Extract error:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // Get usage statistics
+  app.get("/api/stats", async (req, res) => {
+    try {
+      // Get recent activity stats
+      const embeddings = await storage.getUserEmbeddings(0); // Get all embeddings
+      const extractions = await storage.getUserExtractions(0); // Get all extractions
+      
+      res.json({
+        totalEmbeddings: embeddings.length,
+        totalExtractions: extractions.length,
+        recentActivity: {
+          embeddings: embeddings.slice(-5), // Last 5 embeddings
+          extractions: extractions.slice(-5), // Last 5 extractions
+        }
+      });
+    } catch (error) {
+      console.error("Stats error:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });

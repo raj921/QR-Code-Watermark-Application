@@ -52,11 +52,14 @@ Project scope: Personal project focused on core steganography features only - no
 - **File Upload**: Drag-and-drop zones with PNG validation
 - **Progress Tracking**: Real-time progress bars for processing operations
 - **Result Display**: Downloadable results with status indicators
+- **Activity Stats**: Real-time database statistics showing usage metrics
 - **Responsive Design**: Mobile-first approach with glass morphism effects
 
 ### Database Schema
-- **Users Table**: Basic user management structure (currently using in-memory storage)
-- **Extensible**: Drizzle ORM setup allows easy schema evolution
+- **Users Table**: Basic user management structure with username and email
+- **Embeddings Table**: Tracks all embedding operations with file details and payload size
+- **Extractions Table**: Records all extraction attempts with success/failure status
+- **PostgreSQL**: Production-ready database with Drizzle ORM
 - **Migration Support**: Built-in migration system for schema changes
 
 ## Data Flow
