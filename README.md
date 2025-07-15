@@ -61,5 +61,25 @@ A personal **steganography application** that allows users to **securely embed a
 
 ---
 
-## 📁 Project Structure
+## ⚙️ Development Setup
+
+### 🔧 Local Development
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/yourusername/qr-code-watermark-app.git
+cd qr-code-watermark-app
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Setup environment
+cp .env.example .env
+# Add your DATABASE_URL and other secrets
+
+# 4. Run database migrations
+pnpm drizzle db:push
+
+# 5. Start the dev server
+pnpm dev
 
